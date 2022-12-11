@@ -17,15 +17,22 @@ export const minimax_EXAMPLE = (
 
   const potentialMoves = board.moves()
 
+  // Randomize order to add some variance
+  potentialMoves.sort((a, b) => {
+    return 0.5 - Math.random()
+  })
+
   let bestEvaluation = isMaximizing ? -Infinity : Infinity
   let bestMove = potentialMoves[0]
   potentialMoves.forEach((move) => {
     const boardCopy = new Chess(board.fen())
     boardCopy.move(move)
 
+    // This is our base case
     let childBestMove = move
     let childEvaluation = evaluationFunction(boardCopy)
 
+    // This is our recursive case
     if (depth > 0) {
       const { move: mimMove, evaluation: mimEvaluation } = minimax_EXAMPLE(
         boardCopy,
