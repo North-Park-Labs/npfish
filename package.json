@@ -10,21 +10,29 @@
     "format": "prettier ./pages"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.4.3",
     "@emotion/babel-plugin": "^11.10.5",
     "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@types/chess.js": "^0.13.4",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.8",
+    "@types/react-no-ssr": "^1.1.3",
     "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "chess.js": "^1.0.0-alpha.0",
     "eslint": "8.27.0",
     "eslint-config-next": "13.0.3",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-simple-import-sort": "^8.0.0",
+    "framer-motion": "^7.6.19",
     "next": "13.0.3",
     "prettier": "^2.7.1",
     "react": "18.2.0",
+    "react-chessboard": "^1.3.1",
     "react-dom": "18.2.0",
+    "react-no-ssr": "^1.1.0",
     "typescript": "4.8.4"
   }
 }
