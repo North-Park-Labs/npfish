@@ -2,7 +2,7 @@ import { Box, Button, Select, Stack } from '@chakra-ui/react'
 import { Chess, Move } from 'chess.js'
 import { RandomBot } from 'engines/RandomBot'
 import { TeddyBot } from 'engines/TeddyBot'
-import { Engine, Engines } from 'engines/types'
+import { Engine, EngineResponse, Engines } from 'engines/types'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Chessboard } from 'react-chessboard'
 
@@ -25,28 +25,27 @@ export function Driver() {
     }
 
     const makeMove = () => {
-      let moveToMake: string | Move = ''
-      if (game.turn() === 'w') {
-        moveToMake = whiteEngine(new Chess(game.fen()))
-      } else {
-        moveToMake = blackEngine(new Chess(game.fen()))
+      const worker = new Worker(new URL('../engineWorker.ts', import.meta.url))
+      worker.onmessage = (event: MessageEvent<EngineResponse>) => {
+        game.move(event.data.move)
+        setGameRender(new Chess(game.fen()))
+
+        if (!game.isGameOver()) {
+          setTimeout(makeMove, 500)
+        } else {
+          setIsGameRunning(false)
+        }
+        worker.terminate()
       }
 
-      console.log(moveToMake)
-      game.move(moveToMake)
-      setGameRender(new Chess(game.fen()))
-
-      if (!game.isGameOver()) {
-        setTimeout(makeMove, 1000)
-      } else {
-        setIsGameRunning(false)
-      }
+      worker.postMessage({
+        engineName: game.turn() === 'w' ? whiteEngName : blackEngName,
+        fen: game.fen(),
+      })
     }
 
     makeMove()
   }
-
-  console.log(gameRender)
 
   return (
     <Box

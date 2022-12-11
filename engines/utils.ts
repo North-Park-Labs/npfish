@@ -11,8 +11,13 @@ import { Chess, Move } from 'chess.js'
 export const minimax_EXAMPLE = (
   board: Chess,
   depth: number,
-  evaluationFunction: (board: Chess) => number
-): { move: Move | string; evaluation: number } => {
+  evaluationFunction: (board: Chess) => number,
+  numberOfNodesSearched: number = 0
+): {
+  move: Move | string
+  evaluation: number
+  numberOfNodesSearched: number
+} => {
   const isMaximizing = board.turn() === 'w'
 
   const potentialMoves = board.moves()
@@ -25,6 +30,7 @@ export const minimax_EXAMPLE = (
   let bestEvaluation = isMaximizing ? -Infinity : Infinity
   let bestMove = potentialMoves[0]
   potentialMoves.forEach((move) => {
+    numberOfNodesSearched += 1
     const boardCopy = new Chess(board.fen())
     boardCopy.move(move)
 
@@ -37,7 +43,8 @@ export const minimax_EXAMPLE = (
       const { move: mimMove, evaluation: mimEvaluation } = minimax_EXAMPLE(
         boardCopy,
         depth - 1,
-        evaluationFunction
+        evaluationFunction,
+        numberOfNodesSearched
       )
 
       childBestMove = mimMove
@@ -60,5 +67,6 @@ export const minimax_EXAMPLE = (
   return {
     move: bestMove,
     evaluation: bestEvaluation,
+    numberOfNodesSearched,
   }
 }

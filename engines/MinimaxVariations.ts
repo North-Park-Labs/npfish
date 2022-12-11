@@ -3,22 +3,31 @@ import { Chess, Move } from 'chess.js'
 import { Engine } from './types'
 import { minimax_EXAMPLE } from './utils'
 
-export const MinimaxDepth1: Engine = (board: Chess): string | Move => {
+export const MinimaxDepth1: Engine = (board: Chess) => {
   const { move, evaluation } = minimax_EXAMPLE(board, 1, evaluateBoard)
 
-  return move
+  return {
+    move,
+    evaluation,
+  }
 }
 
-export const MinimaxDepth2: Engine = (board: Chess): string | Move => {
+export const MinimaxDepth2: Engine = (board: Chess) => {
   const { move, evaluation } = minimax_EXAMPLE(board, 2, evaluateBoard)
 
-  return move
+  return {
+    move,
+    evaluation,
+  }
 }
 
-export const MinimaxDepth3: Engine = (board: Chess): string | Move => {
+export const MinimaxDepth3: Engine = (board: Chess) => {
   const { move, evaluation } = minimax_EXAMPLE(board, 3, evaluateBoard)
 
-  return move
+  return {
+    move,
+    evaluation,
+  }
 }
 
 const evaluateBoard = (board: Chess) => {

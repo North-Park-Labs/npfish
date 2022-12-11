@@ -2,9 +2,13 @@ import { Chess, Move } from 'chess.js'
 
 import { Engine } from './types'
 
-export const TemplateBot: Engine = (board: Chess): string | Move => {
+export const TemplateBot: Engine = (board: Chess) => {
   const moves = board.moves()
   const move = moves[Math.floor(Math.random() * moves.length)]
 
-  return move
+  return {
+    move,
+    evaluation: 0,
+    numberOfNodesSearched: undefined,
+  }
 }

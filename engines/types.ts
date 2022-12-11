@@ -8,7 +8,13 @@ import {
 import { RandomBot } from './RandomBot'
 import { TeddyBot } from './TeddyBot'
 
-export type Engine = (board: Chess) => string | Move
+export type EngineResponse = {
+  move: string | Move
+  evaluation: number
+  numberOfNodesSearched?: number
+}
+
+export type Engine = (board: Chess) => EngineResponse
 
 export const Engines = [
   {
