@@ -1,6 +1,10 @@
 import { Chess, Move } from 'chess.js'
 
-import { MinimaxDepth1, MinimaxDepth2 } from './MinimaxVariations'
+import {
+  MinimaxDepth1,
+  MinimaxDepth2,
+  MinimaxDepth3,
+} from './MinimaxVariations'
 import { RandomBot } from './RandomBot'
 import { TeddyBot } from './TeddyBot'
 
@@ -18,6 +22,10 @@ export const Engines = [
   {
     name: 'Minimax Example (D2)',
     engine: MinimaxDepth2,
+  },
+  {
+    name: '*SLOW* Minimax Example (D3)',
+    engine: MinimaxDepth3,
   },
   {
     name: 'TeddyBot',
