@@ -14,6 +14,14 @@ There is a default Minimax algorithm function in the `engines/utils.ts` file tha
 
 **PLEASE ONLY MODIFY CODE IN YOUR NEW ENGINE FILE.** If you are interested in contributing, please open a PR or text Teddy/Alex.
 
+### Running
+
+```
+yarn dev
+```
+
+And open up `localhost:3000`
+
 ### Things we are currently working on adding
 
 - Move it to a web worker so can calculate deeper
