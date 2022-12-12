@@ -266,6 +266,7 @@ export function Driver() {
           </Box>
         </Box>
         <Box css={{ marginLeft: 36 }}>
+          {/* Add tooltip for people who do not know what Line Evaluation means */}
           <Text fontSize="2xl">Live Evaluation</Text>
           <Text>Black Engine: {blackEval}</Text>
           <Text>White Engine: {whiteEval}</Text>
