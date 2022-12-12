@@ -16,18 +16,19 @@ export class BasicMinimaxD23S extends Engine {
     onUpdateResponse: (response: EngineResponse) => void
     onFinish: (response: EngineResponse) => void
   }) {
-    const { move, evaluation } = minimax_EXAMPLE({
+    const { move, evaluation, numberOfNodesSearched } = minimax_EXAMPLE({
       board,
       depthLimit: 2,
       currentDepth: 0,
       evaluationFunction: evaluateBoard,
       onUpdateResponse,
+      numberOfNodesSearched: { count: 0 },
     })
 
     onFinish({
       move,
       evaluation,
-      numberOfNodesSearched: 0,
+      numberOfNodesSearched: numberOfNodesSearched.count,
     })
   }
 

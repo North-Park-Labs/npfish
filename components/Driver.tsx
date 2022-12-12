@@ -28,10 +28,13 @@ export function Driver() {
   const [whiteEval, setWhiteEval] = useState<number>(0)
   const [blackEval, setBlackEval] = useState<number>(0)
 
+  const [whiteNodes, setWhiteNodes] = useState<number>(0)
+  const [blackNodes, setBlackNodes] = useState<number>(0)
+
   const [isGameRunning, setIsGameRunning] = useState<boolean>(false)
 
-  const [whiteEngName, setWhiteEngName] = useState<string>('RandomBot')
-  const [blackEngName, setBlackEngName] = useState<string>('Human')
+  const [whiteEngName, setWhiteEngName] = useState<string>('TeddyBot')
+  const [blackEngName, setBlackEngName] = useState<string>('BasicMinimaxD23S')
 
   const [wClock, setWClock] = useState<number>(DEFAULT_CLOCK_VALUE)
   const [wInterval, setWInterval] = useState<NodeJS.Timer | null>(null)
@@ -99,13 +102,16 @@ export function Driver() {
   }, [wClock, bClock])
 
   const startGame = () => {
-    if (whiteEngName === 'human' || blackEngName === 'human') {
+    setIsGameRunning(true)
+    setResult(null)
+    setGameRender(new Chess())
+    setWClock(DEFAULT_CLOCK_VALUE)
+    setBClock(DEFAULT_CLOCK_VALUE)
+
+    if (whiteEngName === 'Human' || blackEngName === 'Human') {
       startHumanGame()
       return
     }
-
-    setIsGameRunning(true)
-    setResult(null)
 
     const game = new Chess()
 
@@ -116,8 +122,10 @@ export function Driver() {
       worker.onmessage = (event: MessageEvent<EngineResponse>) => {
         if (game.turn() === 'w') {
           setWhiteEval(event.data.evaluation)
+          setWhiteNodes(event.data.numberOfNodesSearched)
         } else {
           setBlackEval(event.data.evaluation)
+          setBlackNodes(event.data.numberOfNodesSearched)
         }
 
         game.move(event.data.move)
@@ -152,8 +160,10 @@ export function Driver() {
     worker.onmessage = (event: MessageEvent<EngineResponse>) => {
       if (gameInstance.turn() === 'w') {
         setWhiteEval(event.data.evaluation)
+        setWhiteNodes(event.data.numberOfNodesSearched)
       } else {
         setBlackEval(event.data.evaluation)
+        setBlackNodes(event.data.numberOfNodesSearched)
       }
 
       const gameCopy = new Chess(gameInstance.fen())
@@ -172,7 +182,6 @@ export function Driver() {
       worker.terminate()
     }
 
-    console.log(gameRender.turn())
     worker.postMessage({
       engineName: gameInstance.turn() === 'w' ? whiteEngName : blackEngName,
       fen: gameInstance.fen(),
@@ -180,10 +189,7 @@ export function Driver() {
   }
 
   const startHumanGame = () => {
-    setIsGameRunning(true)
-    setResult(null)
-    setGameRender(new Chess())
-    if (whiteEngName === 'human') {
+    if (whiteEngName === 'Human') {
       return
     }
 
@@ -198,7 +204,6 @@ export function Driver() {
     const result = gameCopy.move({
       from: sourceSquare,
       to: targetSquare,
-      promotion: 'q', // always promote to a queen for example simplicity
     })
 
     setGameRender(gameCopy)
@@ -234,7 +239,7 @@ export function Driver() {
               <option value="Human">Human</option>
               {Engines.map((engine) => (
                 <option key={engine.name} value={engine.name}>
-                  {engine.name}
+                  {new engine().name}
                 </option>
               ))}
             </Select>
@@ -254,7 +259,7 @@ export function Driver() {
               <option value="Human">Human</option>
               {Engines.map((engine) => (
                 <option key={engine.name} value={engine.name}>
-                  {engine.name}
+                  {new engine().name}
                 </option>
               ))}
             </Select>
@@ -265,11 +270,16 @@ export function Driver() {
             </Box>
           </Box>
         </Box>
-        <Box css={{ marginLeft: 36 }}>
+        <Box css={{ marginLeft: 36, width: 300 }}>
           {/* Add tooltip for people who do not know what Line Evaluation means */}
           <Text fontSize="2xl">Live Evaluation</Text>
           <Text>Black Engine: {blackEval}</Text>
           <Text>White Engine: {whiteEval}</Text>
+          <Text fontSize="2xl" css={{ marginTop: 16 }}>
+            Last Move Stats
+          </Text>
+          <Text>Black Nodes Evaluated: {blackNodes}</Text>
+          <Text>White Nodes Evaluated: {whiteNodes}</Text>
           <Text fontSize="2xl" css={{ marginTop: 16 }}>
             Result
           </Text>
