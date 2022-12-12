@@ -3,6 +3,9 @@ import { Chess, Move } from 'chess.js'
 import { Engine } from './Engine'
 import { EngineResponse } from './types'
 
+// Improvements I made:
+//   - Added alpha beta pruning so can run minimax at depth 3
+//   - Added piece placement scoring to evaluation
 export class TeddyBot extends Engine {
   name = 'TeddyBot'
 

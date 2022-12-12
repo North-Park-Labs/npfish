@@ -129,7 +129,11 @@ export function Driver() {
         }
 
         game.move(event.data.move)
-        setGameRender(new Chess(game.fen()))
+        setGameRender(game)
+
+        // const gameCopy = new Chess()
+        // gameCopy.loadPgn(game.pgn())
+        // setGameRender(gameCopy)
 
         if (!game.isGameOver()) {
           setTimeout(makeMove, 500)
@@ -166,7 +170,8 @@ export function Driver() {
         setBlackNodes(event.data.numberOfNodesSearched)
       }
 
-      const gameCopy = new Chess(gameInstance.fen())
+      const gameCopy = new Chess()
+      gameCopy.loadPgn(gameRender.pgn())
 
       gameCopy.move(event.data.move)
       setGameRender(gameCopy)
@@ -199,7 +204,8 @@ export function Driver() {
   }
 
   function onDrop(sourceSquare: string, targetSquare: string) {
-    const gameCopy = new Chess(gameRender.fen())
+    const gameCopy = new Chess()
+    gameCopy.loadPgn(gameRender.pgn())
 
     const result = gameCopy.move({
       from: sourceSquare,
@@ -213,7 +219,22 @@ export function Driver() {
       return false
     }
 
-    setTimeout(() => makeEngineMoveAgainstHuman(gameCopy), 500)
+    if (gameCopy.isGameOver()) {
+      if (gameCopy.isDraw()) {
+        setResult('Draw')
+      } else {
+        setResult(gameCopy.turn() === 'w' ? 'Black' : 'White')
+      }
+      setIsGameRunning(false)
+    } else {
+      if (
+        (gameCopy.turn() === 'w' && whiteEngName !== 'Human') ||
+        (gameCopy.turn() === 'b' && blackEngName !== 'Human')
+      ) {
+        setTimeout(() => makeEngineMoveAgainstHuman(gameCopy), 500)
+      }
+    }
+
     return true
   }
 
@@ -284,6 +305,10 @@ export function Driver() {
             Result
           </Text>
           <Text>{result ? result : 'In Progress'}</Text>
+          <Text fontSize="2xl" css={{ marginTop: 16 }}>
+            Moves
+          </Text>
+          <Text>{gameRender.pgn()}</Text>
         </Box>
       </Box>
       <Box css={{ marginTop: 36 }}>
