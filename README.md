@@ -4,24 +4,24 @@ NPFISH is an experimental game where you can code your own Chess AI that will be
 
 ### Instructions
 
-1. Create a new file in the `engines` folder
-2. Copy the code in `TemplateBot.ts`
-3. Rename the class to your own bot name, and fill in the `name` variable
-4. Add your bot to the array in `engines/types.ts`
-5. Go ahead and code your own logic in your new file!
-6. You can see `BasicMinimax` as an example
+1. Run `yarn` in root to install dependencies.
+1. Create a new file in the `engines` folder. You could call it `[your_name]Bot.ts`. For example, `TeddyBot.ts`.
+1. Copy the code in `TemplateBot.ts`
+1. Do the TODOs. For example, change the clas name to your own bot name, and fill in the `name` variable
+1. Add your bot to the array in `engines/types.ts`
+1. Now, code your own logic in the file you created!
 
-There is a default Minimax algorithm function in the `engines/utils.ts` file that you are welcome to copy, if you just want to play around with the board evaluation functions.
+> Hint: look at `BasicMinimax` in the engines directory as an example. You are welcome to copy it if you just want to test it out
 
-Some hints...
+Some caveats...
 
 - The code itself is not written in the most optimal way
-- Alpha-Beta Pruning
-- Better board evaluation
+- Consider Alpha-Beta Pruning
+- Think about Better board evaluation
 
 **PLEASE ONLY MODIFY CODE IN YOUR NEW ENGINE FILE.** If you are interested in contributing, please open a PR or text Teddy/Alex.
 
-### Running
+### Try it out!
 
 ```
 yarn dev

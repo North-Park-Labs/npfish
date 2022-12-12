@@ -3,9 +3,8 @@ import { Chess, Move } from 'chess.js'
 import { Engine } from './Engine'
 import { EngineResponse } from './types'
 
-// TODO: Update the class name
-export class TemplateBot extends Engine {
-  name = 'TemplateBot' // TODO: Update the engine name here
+export class AlexBot extends Engine {
+  name = 'AlexBot'
 
   calculateMove({
     board, // This provides a Chess.js instance of a board. See Chess.js on Github for implementation details.
@@ -17,9 +16,6 @@ export class TemplateBot extends Engine {
     onFinish: (response: EngineResponse) => void
   }) {
     const moves = board.moves()
-
-    // TODO: update how to choose a move.
-    // Right now, the template chooses a random move!
     const move = moves[Math.floor(Math.random() * moves.length)]
 
     onFinish({
@@ -31,11 +27,9 @@ export class TemplateBot extends Engine {
     return
   }
 
-  /*
-   * Calculates the maximum time in milliseconds your engine should think for
-   * If onFinish is called first, your engine will not think for this long
-   * If this time hits, then your engine will return the latest onUpdateResponse call
-   */
+  // This calculates the maximum time in milliseconds your engine should think for
+  // If onFinish is called first, your engine will not think for this long
+  // If this time hits, then your engine will return the latest onUpdateResponse call
   getCalculationTimeInMs(board: Chess): number {
     return 3000
   }
