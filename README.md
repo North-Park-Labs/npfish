@@ -5,10 +5,11 @@ NPFISH is an experimental game where you can code your own Chess AI that will be
 ### Instructions
 
 1. Create a new file in the `engines` folder
-2. Copy the code in `RandomBot.ts`
+2. Copy the code in `TemplateBot.ts`
 3. Rename the class to your own bot name, and fill in the `name` variable
 4. Add your bot to the array in `engines/types.ts`
 5. Go ahead and code your own logic in your new file!
+6. You can see `BasicMinimax` as an example
 
 There is a default Minimax algorithm function in the `engines/utils.ts` file that you are welcome to copy, if you just want to play around with the board evaluation functions.
 
