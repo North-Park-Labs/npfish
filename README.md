@@ -7,7 +7,7 @@ NPFISH is an experimental game where you can code your own Chess AI that will be
 1. Run `yarn` in root to install dependencies.
 1. Create a new file in the `engines` folder. You could call it `[your_name]Bot.ts`. For example, `TeddyBot.ts`.
 1. Copy the code in `TemplateBot.ts`
-1. Do the TODOs. For example, change the clas name to your own bot name, and fill in the `name` variable
+1. Do the TODOs. For example, change the class name to your own bot name, and fill in the `name` variable
 1. Add your bot to the array in `engines/types.ts`
 1. Now, code your own logic in the file you created!
 
