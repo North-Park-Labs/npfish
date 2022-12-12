@@ -4,6 +4,7 @@ NPFISH is an experimental game where you can code your own Chess AI that will be
 
 ### Instructions
 
+1. Clone this repo to your local machine
 1. Run `yarn` in root to install dependencies.
 1. Create a new file in the `engines` folder. You could call it `[your_name]Bot.ts`. For example, `TeddyBot.ts`.
 1. Copy the code in `TemplateBot.ts`
@@ -18,6 +19,10 @@ Some hints on how you can improve the `TemplateBot`
 - The code itself is not written in the most optimal way
 - Consider Alpha-Beta Pruning
 - Think about Better board evaluation
+
+Your challenge is to try to write an engine that beats `BasicMinimax`!
+
+The platform itself is pretty buggy, refreshing the pages usually does the trick.
 
 **PLEASE ONLY MODIFY CODE IN YOUR NEW ENGINE FILE.** If you are interested in contributing, please open a PR or text Teddy/Alex.
 
