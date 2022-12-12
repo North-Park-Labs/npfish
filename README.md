@@ -14,15 +14,17 @@ Discord: https://discord.gg/5DTHUkPc
 1. Add your bot to the array in `engines/types.ts`
 1. Now, code your own logic in the file you created!
 
+**Your challenge is to try to write an engine that beats `BasicMinimax`!**
+
 > Hint: look at `BasicMinimax` in the engines directory as an example on how to return a `move` and an `evaluation`. You are welcome to copy it if you just want to test it out
 
-Some hints on how you can improve the `TemplateBot`
+> Hint: I would recommend copying the Minimax Example, and using that as a starting point for your algorithm.
 
-- The code itself is not written in the most optimal way
+Some additional hints on potential improvements:
+
+- Minimax Example itself is not written in the most optimal way
 - Consider Alpha-Beta Pruning
-- Think about Better board evaluation
-
-Your challenge is to try to write an engine that beats `BasicMinimax`!
+- Think about a btter board evaluation
 
 The platform itself is pretty buggy, refreshing the pages usually does the trick.
 
@@ -38,5 +40,5 @@ And open up `localhost:3000`
 
 ### Things we are currently working on adding
 
-- Move it to a web worker so can calculate deeper
-- Add a time limit infrastructure, so that you are limited by time
+- Moving to be a web-based editor
+- Moving calculations to be run on a server
