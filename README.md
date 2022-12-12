@@ -2,6 +2,8 @@
 
 NPFISH is an experimental game where you can code your own Chess AI that will be pitted against other Chess AIs.
 
+Discord: https://discord.gg/5DTHUkPc
+
 ### Instructions
 
 1. Clone this repo to your local machine
