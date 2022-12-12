@@ -1,13 +1,33 @@
 import { Chess, Move } from 'chess.js'
 
-import { Engine } from './types'
+import { Engine } from './Engine'
+import { EngineResponse } from './types'
 
-export const RandomBot: Engine = (board: Chess) => {
-  const moves = board.moves()
-  const move = moves[Math.floor(Math.random() * moves.length)]
+export class RandomBot extends Engine {
+  name = 'RandomBot'
 
-  return {
-    move,
-    evaluation: 0,
+  calculateMove({
+    board,
+    onUpdateResponse,
+    onFinish,
+  }: {
+    board: Chess
+    onUpdateResponse: (response: EngineResponse) => void
+    onFinish: (response: EngineResponse) => void
+  }) {
+    const moves = board.moves()
+    const move = moves[Math.floor(Math.random() * moves.length)]
+
+    onFinish({
+      move,
+      evaluation: 0,
+      numberOfNodesSearched: moves.length,
+    })
+
+    return
+  }
+
+  getCalculationTimeInMs(board: Chess): number {
+    return 3000
   }
 }

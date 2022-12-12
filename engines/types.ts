@@ -1,40 +1,13 @@
-import { Chess, Move } from 'chess.js'
+import { Move } from 'chess.js'
 
-import {
-  MinimaxDepth1,
-  MinimaxDepth2,
-  MinimaxDepth3,
-} from './MinimaxVariations'
+import { BasicMinimaxD23S } from './BasicMinimax'
 import { RandomBot } from './RandomBot'
 import { TeddyBot } from './TeddyBot'
 
 export type EngineResponse = {
   move: string | Move
   evaluation: number
-  numberOfNodesSearched?: number
+  numberOfNodesSearched: number
 }
 
-export type Engine = (board: Chess) => EngineResponse
-
-export const Engines = [
-  {
-    name: 'RandomBot',
-    engine: RandomBot,
-  },
-  {
-    name: 'Minimax Example (D1)',
-    engine: MinimaxDepth1,
-  },
-  {
-    name: 'Minimax Example (D2)',
-    engine: MinimaxDepth2,
-  },
-  {
-    name: '*SLOW* Minimax Example (D3)',
-    engine: MinimaxDepth3,
-  },
-  {
-    name: 'TeddyBot',
-    engine: TeddyBot,
-  },
-]
+export const Engines = [RandomBot, BasicMinimaxD23S]

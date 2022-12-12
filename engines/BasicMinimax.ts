@@ -1,32 +1,38 @@
 import { Chess, Move } from 'chess.js'
 
-import { Engine } from './types'
+import { Engine } from './Engine'
+import { EngineResponse } from './types'
 import { minimax_EXAMPLE } from './utils'
 
-export const MinimaxDepth1: Engine = (board: Chess) => {
-  const { move, evaluation } = minimax_EXAMPLE(board, 1, evaluateBoard)
+export class BasicMinimaxD23S extends Engine {
+  name = 'Minimax (D2,3s)'
 
-  return {
-    move,
-    evaluation,
+  calculateMove({
+    board,
+    onUpdateResponse,
+    onFinish,
+  }: {
+    board: Chess
+    onUpdateResponse: (response: EngineResponse) => void
+    onFinish: (response: EngineResponse) => void
+  }) {
+    const { move, evaluation } = minimax_EXAMPLE({
+      board,
+      depthLimit: 2,
+      currentDepth: 0,
+      evaluationFunction: evaluateBoard,
+      onUpdateResponse,
+    })
+
+    onFinish({
+      move,
+      evaluation,
+      numberOfNodesSearched: 0,
+    })
   }
-}
 
-export const MinimaxDepth2: Engine = (board: Chess) => {
-  const { move, evaluation } = minimax_EXAMPLE(board, 2, evaluateBoard)
-
-  return {
-    move,
-    evaluation,
-  }
-}
-
-export const MinimaxDepth3: Engine = (board: Chess) => {
-  const { move, evaluation } = minimax_EXAMPLE(board, 3, evaluateBoard)
-
-  return {
-    move,
-    evaluation,
+  getCalculationTimeInMs(board: Chess): number {
+    return 3000
   }
 }
 
