@@ -10,4 +10,4 @@ export type EngineResponse = {
   numberOfNodesSearched: number
 }
 
-export const Engines = [RandomBot, BasicMinimaxD23S, TeddyBot, AlexBot]
+export const Engines = [RandomBot, BasicMinimaxD23S, TeddyBot]
