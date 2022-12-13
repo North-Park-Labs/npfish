@@ -1,5 +1,6 @@
 import { Move } from 'chess.js'
 
+import { AlexBot } from './AlexBot'
 import { BasicMinimaxD23S } from './BasicMinimax'
 import { BetterTeddyBot } from './BetterTeddyBot'
 import { RandomBot } from './RandomBot'
@@ -11,4 +12,10 @@ export type EngineResponse = {
   numberOfNodesSearched: number
 }
 
-export const Engines = [RandomBot, BasicMinimaxD23S, TeddyBot, BetterTeddyBot]
+export const Engines = [
+  RandomBot,
+  BasicMinimaxD23S,
+  TeddyBot,
+  BetterTeddyBot,
+  AlexBot,
+]
